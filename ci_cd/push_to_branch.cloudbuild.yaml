@@ -1,0 +1,12 @@
+﻿steps:
+  # placeholder step
+  - id: 'branch-name'
+    name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: bash
+    args:
+      - '-c'
+      - |
+        echo "------------------------"
+        echo "$BRANCH_NAME"
+        echo "------------------------"
+    
