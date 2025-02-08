@@ -1,19 +1,21 @@
-# terraform {
-#   backend "gcs" {
-#     bucket = "weather-api-tfstate"
-#     prefix = "env/dev"
-#   }
-# }
-
-# This Terraform won't create any Google Cloud resources, so additional 
-# permissions are required for the service account
-#
-resource "random_string" "random" {
-  length           = 16
-  special          = true
-  override_special = "/@£$"
+terraform {
+  backend "gcs" {
+    bucket = "weather-api-tfstate"
+    prefix = "env/dev"
+  }
 }
 
-output "random_string" {
-    value = random_string.random.id
+variable "project" {}
+
+resource "google_cloud_run_service" "weather-api" {
+  name = "weather-api"
+  location = "europe-west1"
+  project = "${var.project}"
+  template {
+    spec {
+      containers {
+        image = "europe-west1-docker.pkg.dev/${var.project}/cloud-run-containers/weather-api:latest"
+      }
+    }
+  }
 }

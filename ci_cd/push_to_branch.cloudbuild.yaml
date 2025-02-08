@@ -10,6 +10,17 @@
         echo "$BRANCH_NAME"
         echo "-------------------------"
 
+  - id: 'publish-dockerfile'
+    name: 'gcr.io/cloud-builders/docker'
+    entrypoint: bash
+    args:
+      - '-c'
+      - |
+        docker build \
+          -t europe-west1-docker.pkg.dev/${PROJECT_ID}/cloud-run-containers/weather-api:latest \
+          -t europe-west1-docker.pkg.dev/${PROJECT_ID}/cloud-run-containers/weather-api:0.1.0 \
+          -f app/Dockerfile .
+
   - id: 'terraform-init'
     name: 'hashicorp/terraform:1.0.0'
     entrypoint: 'sh'
@@ -24,7 +35,7 @@
     args:
     - '-c'
     - | 
-        terraform plan
+        terraform plan -var "project=${PROJECT_ID}"
 
   - id: 'terraform-apply'
     name: 'hashicorp/terraform:1.0.0'
@@ -32,7 +43,9 @@
     args:
     - '-c'
     - | 
-        terraform apply --auto-approve
-    
+        terraform apply --auto-approve -var "project=${PROJECT_ID}"
+
+images: ['europe-west1-docker.pkg.dev/${PROJECT_ID}/cloud-run-containers/weather-api']
+
 options:
   logging: CLOUD_LOGGING_ONLY
