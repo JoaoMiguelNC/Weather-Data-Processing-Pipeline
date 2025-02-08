@@ -19,7 +19,7 @@ list_cities = ['Lisbon']
 
 @app.route('/')
 def index():
-    return 'Hello!'
+    return 'Hello World!'
 
 
 # @app.route('/weather/current/<city>')
