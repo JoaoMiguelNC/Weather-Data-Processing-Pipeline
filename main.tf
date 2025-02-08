@@ -14,3 +14,16 @@ terraform {
     prefix = "env/dev"
   }
 }
+
+# Cloud Run
+resource "google_cloud_run_service" "weather-api" {
+  name = "weather-api"
+  location = "europe-west1"
+  template {
+    spec {
+      containers {
+        image = "europe-west1-docker.pkg.dev/${PROJECT_ID}/cloud-run-containers/weather-api:latest"
+      }
+    }
+  }
+}
