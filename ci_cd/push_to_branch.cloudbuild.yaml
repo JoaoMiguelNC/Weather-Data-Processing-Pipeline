@@ -27,23 +27,23 @@
     args:
     - '-c'
     - | 
-        terraform init
+        terraform destroy
 
-  - id: 'terraform-plan'
-    name: 'hashicorp/terraform:1.0.0'
-    entrypoint: 'sh'
-    args:
-    - '-c'
-    - | 
-        terraform plan -var "project=${PROJECT_ID}"
+  # - id: 'terraform-plan'
+  #   name: 'hashicorp/terraform:1.0.0'
+  #   entrypoint: 'sh'
+  #   args:
+  #   - '-c'
+  #   - | 
+  #       terraform plan -var "project=${PROJECT_ID}"
 
-  - id: 'terraform-apply'
-    name: 'hashicorp/terraform:1.0.0'
-    entrypoint: 'sh'
-    args:
-    - '-c'
-    - | 
-        terraform apply --auto-approve -var "project=${PROJECT_ID}"
+  # - id: 'terraform-apply'
+  #   name: 'hashicorp/terraform:1.0.0'
+  #   entrypoint: 'sh'
+  #   args:
+  #   - '-c'
+  #   - | 
+  #       terraform apply --auto-approve -var "project=${PROJECT_ID}"
 
 images: ['europe-west1-docker.pkg.dev/${PROJECT_ID}/cloud-run-containers/weather-api']
 
