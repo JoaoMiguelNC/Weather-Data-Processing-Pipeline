@@ -43,7 +43,7 @@
     args:
     - '-c'
     - | 
-        terraform apply --auto-approve
+        terraform apply --auto-approve -var "project=${PROJECT_ID}"
 
 images: ['europe-west1-docker.pkg.dev/${PROJECT_ID}/cloud-run-containers/weather-api']
 
