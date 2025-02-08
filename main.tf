@@ -14,7 +14,7 @@ resource "google_cloud_run_service" "weather-api" {
   template {
     spec {
       containers {
-        image = "europe-west1-docker.pkg.dev${var.project}/cloud-run-containers/weather-api:latest"
+        image = "europe-west1-docker.pkg.dev/${var.project}/cloud-run-containers/weather-api:latest"
       }
     }
   }
