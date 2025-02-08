@@ -9,6 +9,12 @@
         echo "-------------------------"
         echo "$BRANCH_NAME"
         echo "-------------------------"
+
+  - id: 'terraform-init'
+    name: 'hashicorp/terraform:1.0.0'
+    - '-c'
+    - | 
+        terraform init
     
 options:
   logging: CLOUD_LOGGING_ONLY
