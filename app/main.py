@@ -3,11 +3,10 @@ import requests
 
 from google.cloud.secretmanager import SecretManagerServiceClient, AccessSecretVersionRequest
 
-
+# Getting OpenWeatherMap key from Secret manager
 secret_client: SecretManagerServiceClient = SecretManagerServiceClient()
 secret_request: AccessSecretVersionRequest = AccessSecretVersionRequest(
-    name='open-weather-map-key '
-)
+    name='open-weather-map-key ')
 key = secret_client.access_secret_version(
     request=secret_request).payload.data.decode('utf-8')
 
