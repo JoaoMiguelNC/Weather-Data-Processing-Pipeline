@@ -29,10 +29,10 @@ data "google_iam_policy" "noauth" {
   }
 }
 
-resource "google_cloud_run_service_iam_policy" "noauth" {
-  location    = google_cloud_run_service.weather-api.location
-  project     = google_cloud_run_service.weather-api.project
-  service     = google_cloud_run_service.weather-api.name
+# resource "google_cloud_run_service_iam_policy" "noauth" {
+#   location    = google_cloud_run_service.weather-api.location
+#   project     = google_cloud_run_service.weather-api.project
+#   service     = google_cloud_run_service.weather-api.name
 
-  policy_data = data.google_iam_policy.noauth.policy_data
-}
+#   policy_data = data.google_iam_policy.noauth.policy_data
+# }
