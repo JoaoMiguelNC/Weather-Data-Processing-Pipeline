@@ -19,7 +19,7 @@
         docker build \
           -t europe-west1-docker.pkg.dev/${PROJECT_ID}/cloud-run-containers/weather-api:latest \
           -t europe-west1-docker.pkg.dev/${PROJECT_ID}/cloud-run-containers/weather-api:0.0.3 \
-          -f app/Dockerfile
+          -f app/Dockerfile .
 
   - id: 'terraform-init'
     name: 'hashicorp/terraform:1.0.0'
