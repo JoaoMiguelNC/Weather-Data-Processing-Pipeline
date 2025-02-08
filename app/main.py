@@ -23,24 +23,24 @@ def index():
     return 'Hello World!' if key != 'no_value' else 'weather key has no value'
 
 
-# @app.route('/weather/current/<city>')
-# def get_current_temperature(city):
-#     coordinates = requests.get(
-#         f'http://api.openweathermap.org/geo/1.0/direct?q={city},PT&limit=1&appid={key}')
+@app.route('/weather/current/<city>')
+def get_current_temperature(city):
+    coordinates = requests.get(
+        f'http://api.openweathermap.org/geo/1.0/direct?q={city},PT&limit=1&appid={key}')
 
-#     lat = coordinates.json()[0]['lat']
-#     lon = coordinates.json()[0]['lon']
+    lat = coordinates.json()[0]['lat']
+    lon = coordinates.json()[0]['lon']
 
-#     exclude = 'minutely,hourly,daily,alerts'
-#     weather = requests.get(
-#         f'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={exclude}&appid={key}&units=metric')
+    exclude = 'minutely,hourly,daily,alerts'
+    weather = requests.get(
+        f'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={exclude}&appid={key}&units=metric')
 
-#     temperature = {}
-#     temperature['unit'] = 'Celsius (°C)'
-#     temperature['current'] = weather.json()['current']['temp']
-#     temperature['feels_like'] = weather.json()['current']['feels_like']
+    temperature = {}
+    temperature['unit'] = 'Celsius (°C)'
+    temperature['current'] = weather.json()['current']['temp']
+    temperature['feels_like'] = weather.json()['current']['feels_like']
 
-#     return temperature
+    return temperature
 
 if __name__ == "__main__":
     app.run()
