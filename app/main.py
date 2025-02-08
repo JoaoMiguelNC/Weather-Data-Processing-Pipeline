@@ -1,20 +1,42 @@
+from flask import Flask
 import requests
 
-with open('key.txt') as f:
-    key = f.read()
+from google.cloud.secretmanager import SecretManagerServiceClient, AccessSecretVersionRequest
 
-    city = 'Lisbon'
-    country = 'PT'
 
-coordinates = requests.get(f'http://api.openweathermap.org/geo/1.0/direct?q={city},{country}&limit=1&appid={key}')
+secret_client: SecretManagerServiceClient = SecretManagerServiceClient()
+secret_request: AccessSecretVersionRequest = AccessSecretVersionRequest(
+    name='open-weather-map-key '
+)
+key = secret_client.access_secret_version(
+    request=secret_request).payload.data.decode('utf-8')
 
-lat = coordinates.json()[0]['lat']
-lon = coordinates.json()[0]['lon']
 
-weather = requests.get(f'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&appid={key}&units=metric')
+app = Flask(__name__)
 
-for x in weather.json():
-    print(x)
+list_cities = ['Lisbon']
 
-print()
-print(weather.json())
+
+@app.route('/')
+def index():
+    return 'Hello!'
+
+
+@app.route('/weather/current/<city>')
+def get_current_temperature(city):
+    coordinates = requests.get(
+        f'http://api.openweathermap.org/geo/1.0/direct?q={city},PT&limit=1&appid={key}')
+
+    lat = coordinates.json()[0]['lat']
+    lon = coordinates.json()[0]['lon']
+
+    exclude = 'minutely,hourly,daily,alerts'
+    weather = requests.get(
+        f'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={exclude}&appid={key}&units=metric')
+
+    temperature = {}
+    temperature['unit'] = 'Celsius (°C)'
+    temperature['current'] = weather.json()['current']['temp']
+    temperature['feels_like'] = weather.json()['current']['feels_like']
+
+    return temperature
