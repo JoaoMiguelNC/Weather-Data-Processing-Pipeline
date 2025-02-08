@@ -5,8 +5,6 @@ terraform {
   }
 }
 
-variable "project" {}
-
 resource "google_cloud_run_service" "weather-api" {
   name = "weather-api"
   location = "europe-west1"
