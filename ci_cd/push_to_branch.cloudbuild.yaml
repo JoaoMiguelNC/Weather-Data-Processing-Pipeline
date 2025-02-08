@@ -17,6 +17,22 @@
     - '-c'
     - | 
         terraform init
+
+  - id: 'terraform-plan'
+    name: 'hashicorp/terraform:1.0.0'
+    entrypoint: 'sh'
+    args:
+    - '-c'
+    - | 
+        terraform plan
+
+  - id: 'terraform-apply'
+    name: 'hashicorp/terraform:1.0.0'
+    entrypoint: 'sh'
+    args:
+    - '-c'
+    - | 
+        terraform apply --auto-approve
     
 options:
   logging: CLOUD_LOGGING_ONLY
