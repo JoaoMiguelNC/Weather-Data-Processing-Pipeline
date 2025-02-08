@@ -11,6 +11,7 @@ from google.cloud.secretmanager import SecretManagerServiceClient, AccessSecretV
 # key = secret_client.access_secret_version(
 #     request=secret_request).payload.data.decode('utf-8')
 
+key = os.getenv('WEATHER_KEY', 'no_value')
 
 app = Flask(__name__)
 
@@ -19,7 +20,7 @@ list_cities = ['Lisbon']
 
 @app.route('/')
 def index():
-    return 'Hello World!'
+    return 'Hello World!' if key != 'no_value' else 'weather key has no value'
 
 
 # @app.route('/weather/current/<city>')
