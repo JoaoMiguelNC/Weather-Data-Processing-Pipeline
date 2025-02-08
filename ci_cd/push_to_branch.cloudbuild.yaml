@@ -35,7 +35,7 @@
     args:
     - '-c'
     - | 
-        terraform plan
+        terraform plan -var-file terraform.tfvars
 
   - id: 'terraform-apply'
     name: 'hashicorp/terraform:1.0.0'
