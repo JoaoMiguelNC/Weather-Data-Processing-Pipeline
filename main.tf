@@ -11,7 +11,6 @@ resource "google_cloud_run_v2_service" "weather-api" {
   name = "weather-api"
   location = "europe-west1"
   project = "${var.project}"
-  deletion_protection=false
   template {
   containers {
     image = "europe-west1-docker.pkg.dev/${var.project}/cloud-run-containers/weather-api:latest"
