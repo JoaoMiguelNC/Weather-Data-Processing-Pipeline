@@ -1,0 +1,14 @@
+﻿steps:
+
+  - id: 'publish-dockerfile'
+    name: 'gcr.io/cloud-builders/docker'
+    entrypoint: bash
+    args:
+      - '-c'
+      - |
+        docker build \
+          -t europe-west1-docker.pkg.dev/${PROJECT_ID}/cloud-run-containers/weather-api:latest \
+          -t europe-west1-docker.pkg.dev/${PROJECT_ID}/cloud-run-containers/weather-api:0.1.2 \
+          -f app/Dockerfile .
+
+images: ['europe-west1-docker.pkg.dev/${PROJECT_ID}/cloud-run-containers/weather-api']
