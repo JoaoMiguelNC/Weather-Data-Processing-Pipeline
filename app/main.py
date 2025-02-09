@@ -53,9 +53,7 @@ def get_current_temperature(response):
 @app.route('/')
 def index():
 
-    status, response = get_coordinates_response('lisbon')
-
-    return get_current_temperature(response) if status == 200 and response else f'ERROR: city is not a valid city!'
+    return 'To get the temperature, please go to /weather/current<city>'
 
 
 @app.route('/weather/current/<city>')
