@@ -18,7 +18,7 @@
       - |
         docker build \
           -t europe-west1-docker.pkg.dev/${PROJECT_ID}/cloud-run-containers/weather-api:latest \
-          -t europe-west1-docker.pkg.dev/${PROJECT_ID}/cloud-run-containers/weather-api:0.1.0 \
+          -t europe-west1-docker.pkg.dev/${PROJECT_ID}/cloud-run-containers/weather-api:0.1.2 \
           -f app/Dockerfile .
 
   - id: 'terraform-init'
@@ -27,7 +27,7 @@
     args:
     - '-c'
     - | 
-        terraform init
+        terraform init -reconfigure
 
   - id: 'terraform-plan'
     name: 'hashicorp/terraform:1.0.0'
