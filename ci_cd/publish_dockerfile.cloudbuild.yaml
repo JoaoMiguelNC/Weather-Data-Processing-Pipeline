@@ -1,5 +1,4 @@
 ﻿steps:
-
   - id: 'publish-dockerfile'
     name: 'gcr.io/cloud-builders/docker'
     entrypoint: bash
