@@ -10,6 +10,26 @@ The API returns data for all cities with the name given, for a more precise resu
 
 ## Development
 
+### Dev Requirements
+The python requirements for dev are in the file `requirements.txt` in root. 
+To install, first create a virtual environment using
+
+```
+py -m venv venv
+```
+
+Activate it, running in powershell the command
+
+```
+venv\Scripts\activate
+```
+
+And to install the requirent use
+
+```
+pip install -r requirements.txt
+```
+
 ### Manage Versions
 
 To increase the project version use [bumpversion](https://pypi.org/project/bump2version/) using this command:
