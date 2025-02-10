@@ -1,5 +1,5 @@
 ﻿steps:
-  # placeholder step
+  
   - id: 'branch-name'
     name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: bash
@@ -9,6 +9,16 @@
         echo "-------------------------"
         echo "$BRANCH_NAME"
         echo "-------------------------"
+
+  - id: 'tests'
+    name: 'python'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        pip install -r requirements.txt
+        cd tests
+        pytest -q tests.py
 
   - id: 'terraform-init'
     name: 'hashicorp/terraform:1.0.0'
